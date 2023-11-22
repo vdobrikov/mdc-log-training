@@ -1,6 +1,5 @@
 package com.vdobrikov.training.mdclogtraining;
 
-import com.github.javafaker.Faker;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,11 +8,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 public class HelloService {
-    private final Faker faker;
-    public String getHelloResponse() {
-        String name = faker.lordOfTheRings().character();
+    private final NameClient nameClient;
 
-        log.info("New name='{}'", name);
+    public String getHelloResponse() {
+        String name = nameClient.getName();
 
         return "Hello from " + name;
     }
