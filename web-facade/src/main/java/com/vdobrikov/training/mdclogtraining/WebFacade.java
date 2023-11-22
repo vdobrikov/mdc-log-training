@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class MdcLogTrainingApplication {
+public class WebFacade {
 
     public static void main(String[] args) {
-        SpringApplication.run(MdcLogTrainingApplication.class, args);
+        SpringApplication.run(WebFacade.class, args);
     }
 
     @Bean

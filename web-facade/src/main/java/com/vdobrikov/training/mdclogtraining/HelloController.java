@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
     private final HelloService helloService;
-    private final Faker faker;
 
     @GetMapping
     public String hello(@RequestParam(required = false) String name) {
@@ -21,7 +20,6 @@ public class HelloController {
 
         try {
             MDC.put("name", name);
-            MDC.put("abandoned", faker.lordOfTheRings().location());
             return helloService.getHelloResponse();
         } finally {
             MDC.remove("name");
