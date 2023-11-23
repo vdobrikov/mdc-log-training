@@ -1,5 +1,3 @@
-version: '3.6'
-
 services:
   active-mq:
     container_name: active-mq
@@ -7,3 +5,24 @@ services:
     ports:
       - '61616:61616'
       - '8161:8161'
+
+  web-facade:
+    container_name: web-facade
+    image: docker.io/library/web-facade:0.0.1-SNAPSHOT
+    ports:
+      - 8080:8080
+    environment:
+      - ACTIVEMQ_URL=tcp://active-mq:61616
+      - NAME_SERVICE_BASEURL=http://rest-service:8081
+
+  rest-service:
+    container_name: rest-service
+    image: docker.io/library/rest-service:0.0.1-SNAPSHOT
+    ports:
+      - 8081:8081
+
+  queue-service:
+    container_name: queue-service
+    image: docker.io/library/queue-service:0.0.1-SNAPSHOT
+    environment:
+      - ACTIVEMQ_URL=tcp://active-mq:61616
