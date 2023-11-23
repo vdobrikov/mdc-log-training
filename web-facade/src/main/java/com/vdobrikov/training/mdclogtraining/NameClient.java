@@ -2,6 +2,7 @@ package com.vdobrikov.training.mdclogtraining;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -9,13 +10,14 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 @Component
 public class NameClient {
-    private static final String NAME_SERVICE_ENDPOINT = "http://localhost:8081/api/name";
+    @Value("${name-service.endpoint}")
+    private String nameServiceEndpoint;
 
     private final RestTemplate restTemplate;
 
     public String getName() {
-        log.info("Calling name service at '{}'", NAME_SERVICE_ENDPOINT);
+        log.info("Calling name service at '{}'", nameServiceEndpoint);
 
-        return restTemplate.getForObject(NAME_SERVICE_ENDPOINT, String.class);
+        return restTemplate.getForObject(nameServiceEndpoint, String.class);
     }
 }
