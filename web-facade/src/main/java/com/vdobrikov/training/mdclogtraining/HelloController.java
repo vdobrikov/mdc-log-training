@@ -16,10 +16,11 @@ public class HelloController {
     @GetMapping
     public String hello(@RequestParam(required = false) String name) {
         log.info("GET hello. name='{}'", name);
+        name = name == null ? "Unknown" : name;
 
         try {
             MDC.put("name", name);
-            return helloService.getHelloResponse();
+            return name + ", " + helloService.getHelloResponse();
         } finally {
             MDC.remove("name");
         }

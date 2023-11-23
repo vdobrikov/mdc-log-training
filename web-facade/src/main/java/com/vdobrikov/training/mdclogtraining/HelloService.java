@@ -9,10 +9,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class HelloService {
     private final NameClient nameClient;
+    private final AuditService auditService;
 
     public String getHelloResponse() {
         String name = nameClient.getName();
-
-        return "Hello from " + name;
+        String helloMessage = "Hello from " + name;
+        auditService.audit(helloMessage);
+        return helloMessage;
     }
 }

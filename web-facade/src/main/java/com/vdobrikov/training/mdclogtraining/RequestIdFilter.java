@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.UUID;
 
-@Component
+//@Component
 public class RequestIdFilter extends OncePerRequestFilter {
     private static final String HEADER_REQUEST_ID_NAME = "x-app-request-id";
     @Override
